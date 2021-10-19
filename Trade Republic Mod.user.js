@@ -9,7 +9,13 @@
 // @grant        GM_addStyle
 // ==/UserScript==
 
-GM_addStyle(`
+var style;
+var noLogoutTimer;
+var darkMode = true;
+var noLogout = false;
+
+function addDarkMode() {
+    style = GM_addStyle(`
     :root {
         --color-background: #000;
         --color-text-primary: #fff;
@@ -51,7 +57,81 @@ GM_addStyle(`
         filter: invert(100%)
     }
 `);
+}
 
-setInterval(function() {
-    localStorage.setItem('lastActivity', Date.now());
-}, 20);
+function removeDarkMode() {
+    console.log(style)
+    if (style !== undefined) {
+        console.log(style)
+        style.remove();
+    }
+}
+
+function toggleDarkMode() {
+    if (darkMode) {
+        console.log("disable darkmode")
+        darkMode = false;
+        removeDarkMode();
+    } else {
+        console.log("enable darkmode")
+        darkMode = true;
+        addDarkMode();
+    }
+}
+
+function enableNoLogout() {
+    noLogoutTimer = setInterval(function() {
+        localStorage.setItem('lastActivity', Date.now());
+    }, 1000);
+}
+
+function disableNoLogout() {
+    clearInterval(noLogoutTimer);
+}
+
+function toggleNoLogout() {
+    if (noLogout) {
+        console.log("disable NoLogout")
+        noLogout = false;
+        disableNoLogout();
+    } else {
+        console.log("enable NoLogout")
+        noLogout = true;
+        enableNoLogout();
+    }
+}
+
+addDarkMode();
+
+setTimeout(() => {
+    var btnDarkMode = document.createElement('li');
+    btnDarkMode.innerHTML = '<input type="checkbox" id="darkModeBtn" name="darkModeBtn" value="darkModeBtn" checked="true"><label for="darkModeBtn" class="navigationItem__link">DarkMode</label>';
+
+    btnDarkMode.classList.add("navigationItem")
+    document.getElementsByClassName("navigation__list")[0].appendChild(btnDarkMode)
+
+    document.getElementById("darkModeBtn").addEventListener(
+        "click", toggleDarkMode, false
+    );
+
+    var btnNoLogout = document.createElement('li');
+    btnNoLogout.innerHTML = '<input type="checkbox" id="btnNoLogout" name="btnNoLogout" value="btnNoLogout"><label for="btnNoLogout" class="navigationItem__link">No Auto Logout</label>';
+
+    btnNoLogout.classList.add("navigationItem")
+    document.getElementsByClassName("navigation__list")[0].appendChild(btnNoLogout)
+
+    document.getElementById("btnNoLogout").addEventListener(
+        "click", toggleNoLogout, false
+    );
+
+}, 500)
+
+if (darkMode) {
+    addDarkMode();
+} else {
+    removeDarkMode();
+}
+
+removeDarkMode();
+
+console.log("loaded Trade Republic mod by 123456687548")
