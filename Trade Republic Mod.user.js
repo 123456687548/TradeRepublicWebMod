@@ -128,10 +128,6 @@ setTimeout(() => {
 
 if (darkMode) {
     addDarkMode();
-} else {
-    removeDarkMode();
 }
-
-removeDarkMode();
 
 console.log("loaded Trade Republic mod by 123456687548")
