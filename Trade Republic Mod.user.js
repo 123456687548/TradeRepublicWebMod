@@ -54,7 +54,11 @@ function addDarkMode() {
     }
 
     .menuDotsIcon{
-        filter: invert(100%)
+        filter: invert(100%);
+    }
+
+    .current-time-tick text{
+        fill: #fff;
     }
 `);
 }
