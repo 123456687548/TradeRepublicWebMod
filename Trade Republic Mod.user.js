@@ -108,6 +108,32 @@ function toggleNoLogout() {
 
 addDarkMode();
 
+var addCustomButtonsInterval = setInterval(function() {
+    var navigationBar = document.getElementsByClassName("navigation__list");
+    if (navigationBar.length == 0) return
+
+    var btnDarkMode = document.createElement('li');
+    btnDarkMode.innerHTML = '<input type="checkbox" id="darkModeBtn" name="darkModeBtn" value="darkModeBtn" checked="true"><label for="darkModeBtn" class="navigationItem__link">DarkMode</label>';
+    btnDarkMode.classList.add("navigationItem")
+
+    var btnNoLogout = document.createElement('li');
+    btnNoLogout.innerHTML = '<input type="checkbox" id="btnNoLogout" name="btnNoLogout" value="btnNoLogout"><label for="btnNoLogout" class="navigationItem__link">No Auto Logout</label>';
+    btnNoLogout.classList.add("navigationItem")
+
+    navigationBar[0].appendChild(btnDarkMode);
+    navigationBar[0].appendChild(btnNoLogout);
+
+    document.getElementById("darkModeBtn").addEventListener(
+        "click", toggleDarkMode, false
+    );
+
+    document.getElementById("btnNoLogout").addEventListener(
+        "click", toggleNoLogout, false
+    );
+
+    clearInterval(addCustomButtonsInterval);
+}, 1000);
+
 setTimeout(() => {
     var btnDarkMode = document.createElement('li');
     btnDarkMode.innerHTML = '<input type="checkbox" id="darkModeBtn" name="darkModeBtn" value="darkModeBtn" checked="true"><label for="darkModeBtn" class="navigationItem__link">DarkMode</label>';
