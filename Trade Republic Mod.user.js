@@ -43,6 +43,7 @@ function addDarkMode() {
         --color-code-input-background: #333333;
         --color-pin-input-background: #525252;
         --color-content-overlay: hsl(0deg 0% 0% / 60%);
+        --color-chart-text-active-background: #000;
     }
 
     .alertBox.-warning {
