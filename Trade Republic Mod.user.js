@@ -134,29 +134,6 @@ var addCustomButtonsInterval = setInterval(function() {
     clearInterval(addCustomButtonsInterval);
 }, 1000);
 
-setTimeout(() => {
-    var btnDarkMode = document.createElement('li');
-    btnDarkMode.innerHTML = '<input type="checkbox" id="darkModeBtn" name="darkModeBtn" value="darkModeBtn" checked="true"><label for="darkModeBtn" class="navigationItem__link">DarkMode</label>';
-
-    btnDarkMode.classList.add("navigationItem")
-    document.getElementsByClassName("navigation__list")[0].appendChild(btnDarkMode)
-
-    document.getElementById("darkModeBtn").addEventListener(
-        "click", toggleDarkMode, false
-    );
-
-    var btnNoLogout = document.createElement('li');
-    btnNoLogout.innerHTML = '<input type="checkbox" id="btnNoLogout" name="btnNoLogout" value="btnNoLogout"><label for="btnNoLogout" class="navigationItem__link">No Auto Logout</label>';
-
-    btnNoLogout.classList.add("navigationItem")
-    document.getElementsByClassName("navigation__list")[0].appendChild(btnNoLogout)
-
-    document.getElementById("btnNoLogout").addEventListener(
-        "click", toggleNoLogout, false
-    );
-
-}, 500)
-
 if (darkMode) {
     addDarkMode();
 }
