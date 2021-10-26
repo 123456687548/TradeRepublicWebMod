@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Trade Republic Mod
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  Adds Darkmode and disables auto logout on app.traderepublic.com
 // @author       123456687548
 // @match        *://app.traderepublic.com/*
