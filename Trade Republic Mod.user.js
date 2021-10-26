@@ -44,6 +44,12 @@ function addDarkMode() {
         --color-pin-input-background: #525252;
         --color-content-overlay: hsl(0deg 0% 0% / 60%);
         --color-chart-text-active-background: #000;
+        --color-search-hover-background: #767676;
+        --color-search-background: #303030;
+        --color-search-foreground: #ffffff;
+        --color-search-focused-background: #767676;
+        --color-search-drawer-background: #000;
+        --color-search-drawer-focused-background: #383838;
     }
 
     .alertBox.-warning {
@@ -60,6 +66,10 @@ function addDarkMode() {
 
     .current-time-tick text{
         fill: #fff;
+    }
+
+    .autosuggestDrawer__footer {
+        background: #000;
     }
 `);
 }
