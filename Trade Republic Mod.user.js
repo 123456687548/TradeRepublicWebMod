@@ -5,6 +5,8 @@
 // @description  Adds Darkmode and disables auto logout on app.traderepublic.com
 // @author       123456687548
 // @match        *://app.traderepublic.com/*
+// @updateURL    https://github.com/123456687548/TradeRepublicWebMod/raw/master/Trade%20Republic%20Mod.user.js
+// @downloadURL  https://github.com/123456687548/TradeRepublicWebMod/raw/master/Trade%20Republic%20Mod.user.js
 // @icon         https://www.google.com/s2/favicons?domain=traderepublic.com
 // @grant        GM_addStyle
 // ==/UserScript==
