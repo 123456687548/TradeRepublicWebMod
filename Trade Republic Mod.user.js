@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Trade Republic Mod
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  Adds Darkmode and disables auto logout on app.traderepublic.com
 // @author       123456687548
 // @match        *://app.traderepublic.com/*
@@ -86,20 +86,16 @@ function addDarkMode() {
 }
 
 function removeDarkMode() {
-    console.log(style)
     if (style !== undefined) {
-        console.log(style)
         style.remove();
     }
 }
 
 function toggleDarkMode() {
     if (darkMode) {
-        console.log("disable darkmode")
         darkMode = false;
         removeDarkMode();
     } else {
-        console.log("enable darkmode")
         darkMode = true;
         addDarkMode();
     }
@@ -117,17 +113,13 @@ function disableNoLogout() {
 
 function toggleNoLogout() {
     if (noLogout) {
-        console.log("disable NoLogout")
         noLogout = false;
         disableNoLogout();
     } else {
-        console.log("enable NoLogout")
         noLogout = true;
         enableNoLogout();
     }
 }
-
-addDarkMode();
 
 var addCustomButtonsInterval = setInterval(function() {
     var navigationBar = document.getElementsByClassName("navigation__list");
