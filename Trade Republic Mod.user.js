@@ -50,6 +50,9 @@ function addDarkMode() {
         --color-search-focused-background: #767676;
         --color-search-drawer-background: #000;
         --color-search-drawer-focused-background: #383838;
+        --color-table-column-header-background: #0e0e0e;
+        --color-table-column-header: #ffffff;
+        --color-table-row-hover: #0e0e0e;
     }
 
     .alertBox.-warning {
@@ -70,6 +73,14 @@ function addDarkMode() {
 
     .autosuggestDrawer__footer {
         background: #000;
+    }
+
+    .filterSection__header {
+        background-color: #0e0e0e;
+    }
+
+    .filtersHeader {
+        background-color: var(--color-background);
     }
 `);
 }
