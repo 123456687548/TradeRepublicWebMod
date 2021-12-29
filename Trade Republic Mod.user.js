@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Trade Republic Mod
 // @namespace    http://tampermonkey.net/
-// @version      0.5
+// @version      0.6
 // @description  Converts $ to € in knockout's and disables auto logout on app.traderepublic.com
 // @author       123456687548
 // @match        *://app.traderepublic.com/*
@@ -51,10 +51,39 @@ function reportAJAX_Error(rspObj) {
     console.error(`TM scrpt => Error ${rspObj.status}!  ${rspObj.statusText}`);
 }
 
+function asd() {
+    if (!document.URL.endsWith("/knockouts")) return;
+
+    var rows = document.getElementsByClassName("browseDerivativesLayout__row");
+
+    if (rows.length == 0) return;
+
+    for (var i = 0; i < rows.length; i++) {
+        var knockoutCell = rows[i].cells[1].children[0];
+
+        if (knockoutCell.children.length > 1) continue;
+
+        var convElement = addEuroRow(knockoutCell);
+
+        var cellText = knockoutCell.children[0].textContent.replaceAll(" ", "");
+        var currentCurrency = cellText.charAt(cellText.length - 1);
+
+        if (currentCurrency !== "$") {
+            setConvertedCurrencyText(`Currency ${currentCurrency} not supported`);
+            return;
+        }
+
+        var value = cellText.replace("$", "").replace(",", "");
+        var converted = fx.convert(value, { from: "USD", to: "EUR" }).toString();
+        converted = converted.slice(0, converted.indexOf(".") + 3);
+        convElement.textContent = `${converted} €`;
+    }
+}
+
 function convertCurrencyToEuro() {
     var overline = document.getElementsByClassName("-overline")[0];
 
-    if (overline === undefined && overline.childElementCount != 5) return;
+    if (overline === undefined || overline.childElementCount != 5) return;
 
     var convElements = document.getElementsByClassName("euro");
 
@@ -82,8 +111,11 @@ function convertCurrencyToEuro() {
     var dd1Value = dd1Text.replace(" $", "").replace(",", "");
     var dd2Value = dd2Text.replace(" $", "").replace(",", "");
 
-    var converted1 = fx.convert(dd1Value, { from: "USD", to: "EUR" });
-    var converted2 = fx.convert(dd2Value, { from: "USD", to: "EUR" });
+    var converted1 = fx.convert(dd1Value, { from: "USD", to: "EUR" }).toString();
+    var converted2 = fx.convert(dd2Value, { from: "USD", to: "EUR" }).toString();
+
+    converted1 = converted1.slice(0, converted1.indexOf(".") + 3);
+    converted2 = converted2.slice(0, converted2.indexOf(".") + 3);
 
     convElements[0].textContent = `${converted1} €`;
     convElements[1].textContent = `${converted2} €`;
@@ -100,11 +132,11 @@ function setConvertedCurrencyText(text) {
 }
 
 function addEuroRow(appendTo) {
-    var dd = document.createElement("dd");
+    var dd = document.createElement("div");
 
     dd.className = "euro";
 
-    appendTo.appendChild(dd);
+    return appendTo.appendChild(dd);
 }
 
 function enableNoLogout() {
@@ -146,6 +178,7 @@ var addCustomButtonsInterval = setInterval(function() {
 
 setInterval(function() {
     convertCurrencyToEuro();
+    asd();
 }, 1000);
 
 console.log("loaded Trade Republic mod by 123456687548")
